@@ -37,7 +37,7 @@
   --bg-dark: #0f172a;       /* Deep Slate */
   --bg-card: #1e293b;       /* Lighter Slate for cards */
   --primary-color: #38bdf8; /* Electric Blue */
-  --secondary-color: #EE5F38; /* Keep original orange as secondary accent? Or replace? Let's keep for now but mute it */
+  --secondary-color: #38bdf8; /* Switched from orange to AI Blue for brand consistency */
   --secondary-color2: #f472b6; /* Pink Gradient Accent */
   
   /* Text Colors */

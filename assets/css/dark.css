@@ -1,6 +1,5 @@
 /* dark css hrre */
 .dark{
-    --primary-color: var(--text-white-color);
     --foreground-color: var(--text-white-color);
     --foreground-sub-color: #cbd5e1;
     --body-background-color: var(--bg-dark);

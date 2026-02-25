@@ -1869,6 +1869,196 @@ canvas[id*="neural"] {
   transform: none;
 }
 
+/* Premium Scrollbar (AI Engineering Aesthetic) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  border: 2px solid var(--bg-dark);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Global Color Correction (Orange -> AI Blue) */
+.text__secondary, 
+.section__heading--subtitle, 
+.color-secondary,
+.social__share--link:hover,
+.scroll__top--btn,
+.services__card--icon {
+  color: var(--primary-color) !important;
+}
+
+.primary__btn,
+.scroll__top--btn {
+  background: var(--primary-color) !important;
+  color: #0f172a !important; /* Deep contrast text for AI Blue buttons */
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2) !important;
+}
+
+.primary__btn:hover {
+  background: #fff !important;
+  color: var(--primary-color) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+}
+
+/* Glowing Selection */
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+  color: #fff;
+}
+
+/* Phase 2: Cosmic Background (Deep Space) */
+body {
+  background: #050b18 !important; /* Near black foundation */
+  position: relative;
+}
+
+.cosmic-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(15, 23, 42, 0.8) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(30, 41, 59, 0.5) 0%, transparent 50%),
+    linear-gradient(180deg, #050b18 0%, #0f172a 100%);
+  z-index: -3;
+  pointer-events: none;
+}
+
+.nebula-point {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -2;
+  animation: nebula-drift 30s infinite alternate ease-in-out;
+}
+
+.nebula-point--1 {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+  top: -10%;
+  right: -5%;
+}
+
+.nebula-point--2 {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  bottom: 0%;
+  left: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes nebula-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+/* Phase 3: Star Field 🌟 */
+.star-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkling 5s infinite ease-in-out;
+}
+
+@keyframes twinkling {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* Phase 4: Profile Enhancement (Cosmic Halo) 🛸 */
+.hero__thumbnail {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__thumbnail::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: halo-pulse 4s infinite alternate ease-in-out;
+}
+
+.cosmic-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cosmic-orbit::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+.orbit-1 { animation: rotate 20s linear infinite; }
+.orbit-2 { 
+  width: 160%; 
+  height: 160%; 
+  animation: rotate 35s linear infinite reverse;
+  border-color: rgba(139, 92, 246, 0.05);
+}
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes halo-pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+
 /* Premium Cursor Glow */
 .cursor-glow {
   width: 400px;
@@ -2066,4 +2256,41 @@ canvas[id*="neural"] {
   width: 100% !important;
   max-width: 100% !important;
   display: block; /* Isotope handles position */
+}
+
+
+/* Contact Form HUD-ification */
+.contact__input--field {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--text-white) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.contact__input--field:focus {
+  border-color: var(--primary-color) !important;
+  background: rgba(56, 189, 248, 0.05) !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+.contact__info--icon {
+  background: rgba(56, 189, 248, 0.1) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+}
+
+/* Social Link Holographic Lift */
+.social__share--link {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.social__share--link:hover {
+  transform: translateY(-5px) scale(1.2) !important;
+  color: var(--primary-color) !important;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)) !important;
 }

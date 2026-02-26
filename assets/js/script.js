@@ -291,7 +291,8 @@ const offcanvasHeader = function () {
   if (offcanvasOpen) {
     offcanvasOpen.addEventListener("click", function (e) {
       e.preventDefault();
-      if (e.target.dataset.offcanvas != undefined) {
+      const target = e.target.closest("[data-offcanvas]");
+      if (target) {
         offcanvasHeader.classList.add("open");
         body.classList.add("mobile_menu_open");
       }
@@ -300,7 +301,8 @@ const offcanvasHeader = function () {
   if (offcanvasClose) {
     offcanvasClose.addEventListener("click", function (e) {
       e.preventDefault();
-      if (e.target.dataset.offcanvas != undefined) {
+      const target = e.target.closest("[data-offcanvas]");
+      if (target) {
         offcanvasHeader.classList.remove("open");
         body.classList.remove("mobile_menu_open");
       }

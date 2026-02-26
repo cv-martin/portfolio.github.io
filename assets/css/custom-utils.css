@@ -348,9 +348,27 @@
 
 /* Portfolio Interactions */
 .portfolio__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
+  display: block;
+  width: 100%;
+}
+
+.element-item {
+  width: 33.333%;
+  padding: 15px;
+  float: left;
+}
+
+@media (max-width: 991px) {
+  .element-item {
+    width: 50%;
+  }
+}
+
+@media (max-width: 575px) {
+  .element-item {
+    width: 100%;
+    padding: 10px 0;
+  }
 }
 
 .portfolio-container-hover:hover .element-item {
@@ -370,7 +388,7 @@
 /* Feature AI Item (Span 2 columns) */
 @media (min-width: 992px) {
   .element-item.featured-ai-item {
-    grid-column: span 2;
+    width: 66.666% !important;
   }
 }
 
@@ -2080,8 +2098,7 @@ canvas[id*="neural"] {
 /* 8. Responsive */
 @media (max-width: 768px) {
   .portfolio__grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    width: 100% !important;
   }
 
   .portfolio__title {
@@ -2113,14 +2130,14 @@ canvas[id*="neural"] {
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
-  .portfolio__grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+  .element-item {
+    width: 50% !important;
   }
 }
 
 @media (min-width: 1200px) {
-  .portfolio__grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+  .element-item {
+    width: 33.333% !important;
   }
 }
 

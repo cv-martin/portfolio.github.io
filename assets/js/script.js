@@ -11,13 +11,13 @@
 const preLoader = function () {
   let preloaderWrapper = document.getElementById("preloader");
   
-  // Guaranteed fallback: remove preloader after 1 second no matter what for mobile performance
+  // Guaranteed fallback: remove preloader after 500ms for instant mobile reveal
   const forceRemove = setTimeout(function() {
     if (preloaderWrapper && preloaderWrapper.parentNode) {
       preloaderWrapper.classList.add("preloaded");
-      setTimeout(() => preloaderWrapper.remove(), 500);
+      setTimeout(() => preloaderWrapper.remove(), 300);
     }
-  }, 1000);
+  }, 500);
   
   // Normal load behavior
   window.addEventListener("load", () => {
@@ -187,34 +187,25 @@ if(isotopeGrid){
 
     // bind filter button click
     var filtersElem = document.querySelector('.filters-button-group');
-    filtersElem.addEventListener( 'click', function( event ) {
-      // only work with buttons
-      if ( !matchesSelector( event.target, 'button' ) ) {
-        return;
-      }
-      var filterValue = event.target.getAttribute('data-filter');
-      // use matching filter function
-      filterValue = filterFns[ filterValue ] || filterValue;
-      iso.arrange({ filter: filterValue });
-    });
-
-    // change is-checked class on buttons
-    var buttonGroups = document.querySelectorAll('.button-group');
-    for ( var i=0, len = buttonGroups.length; i < len; i++ ) {
-      var buttonGroup = buttonGroups[i];
-      radioButtonGroup( buttonGroup );
-    }
-
-    function radioButtonGroup( buttonGroup ) {
-      buttonGroup.addEventListener( 'click', function( event ) {
-        // only work with buttons
-        if ( !matchesSelector( event.target, 'button' ) ) {
-          return;
-        }
-        buttonGroup.querySelector('.is-checked').classList.remove('is-checked');
-        event.target.classList.add('is-checked');
+    if (filtersElem) {
+      filtersElem.addEventListener( 'click', function( event ) {
+        const button = event.target.closest('button');
+        if ( !button ) return;
+        
+        var filterValue = button.getAttribute('data-filter');
+        // use matching filter function
+        filterValue = filterFns[ filterValue ] || filterValue;
+        iso.arrange({ filter: filterValue });
+        
+        // Update is-checked class
+        filtersElem.querySelector('.is-checked')?.classList.remove('is-checked');
+        button.classList.add('is-checked');
       });
     }
+
+    // change is-checked class on buttons (Shared logic already handled in main listener)
+    // Removed redundant radioButtonGroup listener to avoid event collisions
+
   });
   
 

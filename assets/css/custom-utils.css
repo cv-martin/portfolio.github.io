@@ -124,6 +124,42 @@
   opacity: 1;
 }
 
+/* =========================================
+   ABOUT SECTION LAYOUT FIX (SQUISH/OVERFLOW)
+   ========================================= */
+.about__section--inner {
+  max-width: 100%;
+}
+
+.about__content, .about__thumbnail {
+  min-width: 0; /* allows flex items to shrink below minimum content size */
+}
+
+.about__section--inner .section__heading--title {
+  font-size: clamp(2rem, 3.5vw, 3rem) !important;
+  line-height: 1.2 !important;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .about__content { width: calc(55% - 2rem) !important; }
+  .about__thumbnail { width: calc(45% - 2rem) !important; }
+}
+
+@media only screen and (min-width: 992px) {
+  .about__content { width: calc(50% - 2.5rem) !important; }
+  .about__thumbnail { width: calc(50% - 2.5rem) !important; }
+}
+
+@media only screen and (min-width: 1200px) {
+  .about__content { width: calc(50% - 5rem) !important; }
+  .about__thumbnail { width: calc(50% - 5rem) !important; }
+}
+
+.section__heading--title {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 .services__card--content {
   flex-grow: 1;
   display: flex;

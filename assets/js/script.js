@@ -31,28 +31,15 @@ const preLoader = function () {
 };
 preLoader();
 
-// Prevent Contact Form from reloading page (Speed Fix)
+// Allow standard HTML form submission for Contact Form so Formsubmit.co can activate the email properly
 document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.querySelector(".contact__form");
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    contactForm.addEventListener("submit", () => {
       const btn = contactForm.querySelector("button");
-      const originalText = btn.textContent;
-      btn.textContent = "Sending...";
-      btn.disabled = true;
-      
-      // Simulate success without reload
-      setTimeout(() => {
-        btn.textContent = "Request Sent!";
-        btn.style.backgroundColor = "#22c55e"; // Success Green
-        contactForm.reset();
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.disabled = false;
-          btn.style.backgroundColor = "";
-        }, 3000);
-      }, 1000);
+      btn.textContent = "Sending Request...";
+      // We do not preventDefault here. 
+      // Let the browser submit to formsubmit.co normally.
     });
   }
 });
@@ -123,18 +110,30 @@ function TopOffset(el) {
 const headerStickyWrapper = document.querySelector("header");
 const headerStickyTarget = document.querySelector(".header__sticky");
 
-if (headerStickyTarget) {
+if (headerStickyTarget && headerStickyWrapper) {
   let headerHeight = headerStickyWrapper.clientHeight;
-  window.addEventListener("scroll", function () {
-    let StickyTargetElement = TopOffset(headerStickyWrapper);
-    let TargetElementTopOffset = StickyTargetElement.top;
-
-    if (window.scrollY > TargetElementTopOffset) {
-      headerStickyTarget.classList.add("sticky");
-    } else {
-      headerStickyTarget.classList.remove("sticky");
-    }
+  let targetElementTopOffset = headerStickyWrapper.offsetTop;
+  
+  // Cache offset on resize
+  window.addEventListener("resize", () => {
+    targetElementTopOffset = headerStickyWrapper.offsetTop;
   });
+
+  let isSticky = false;
+  window.addEventListener("scroll", function () {
+    const scrollY = window.scrollY;
+    if (scrollY > targetElementTopOffset) {
+      if (!isSticky) {
+        headerStickyTarget.classList.add("sticky");
+        isSticky = true;
+      }
+    } else {
+      if (isSticky) {
+        headerStickyTarget.classList.remove("sticky");
+        isSticky = false;
+      }
+    }
+  }, { passive: true });
 }
 
 // Scroll up activation
@@ -143,13 +142,21 @@ if (scrollTop) {
   scrollTop.addEventListener("click", function () {
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
   });
+  
+  let isScrollTopVisible = false;
   window.addEventListener("scroll", function () {
     if (window.scrollY > 300) {
-      scrollTop.classList.add("active");
+      if (!isScrollTopVisible) {
+        scrollTop.classList.add("active");
+        isScrollTopVisible = true;
+      }
     } else {
-      scrollTop.classList.remove("active");
+      if (isScrollTopVisible) {
+        scrollTop.classList.remove("active");
+        isScrollTopVisible = false;
+      }
     }
-  });
+  }, { passive: true });
 }
 
 
@@ -242,26 +249,29 @@ if (wrapper) {
   const duration = 400;
 
   let isCounted = false;
-  document.addEventListener("scroll", function () {
+  const handleCounterScroll = function () {
     const wrapperPos = wrapper.offsetTop - window.innerHeight;
     if (!isCounted && window.scrollY > wrapperPos) {
       counters.forEach((counter) => {
-        const countTo = counter.dataset.count;
-
+        const countTo = parseInt(counter.dataset.count);
         const countPerMs = countTo / duration;
 
         let currentCount = 0;
         const countInterval = setInterval(function () {
           if (currentCount >= countTo) {
             clearInterval(countInterval);
+            counter.textContent = countTo;
+          } else {
+            counter.textContent = Math.round(currentCount);
+            currentCount += countPerMs;
           }
-          counter.textContent = Math.round(currentCount);
-          currentCount = currentCount + countPerMs;
-        }, 1);
+        }, 16); // ~60fps instead of 1ms
       });
       isCounted = true;
+      window.removeEventListener("scroll", handleCounterScroll);
     }
-  });
+  };
+  window.addEventListener("scroll", handleCounterScroll, { passive: true });
 }
 
 // testimonial swiper activation

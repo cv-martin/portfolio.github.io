@@ -580,6 +580,8 @@
     background: rgba(15, 23, 42, 0.7) !important; /* Deep Premium Dark */
     -webkit-backdrop-filter: blur(20px) !important;
     backdrop-filter: blur(20px) !important;
+    will-change: transform, backdrop-filter;
+    transform: translateZ(0); /* Hardware accelerate blur */
     box-shadow: 
         0 4px 30px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1) !important; /* Top Light Edge */
@@ -1406,31 +1408,23 @@ canvas[id*="neural"] {
     radial-gradient(ellipse at 80% 20%, rgba(129, 140, 248, 0.12) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
   background-color: var(--body-background-color);
-  animation: meshPulse 8s ease-in-out infinite alternate;
-}
-
-@keyframes meshPulse {
-  0% { 
-    background-position: 0% 0%, 100% 100%, 50% 50%; 
-  }
-  100% { 
-    background-position: 20% 30%, 80% 70%, 60% 40%; 
-  }
+  /* background-position animations cause severe scroll lag, use static or opacity fade instead */
 }
 
 /* Hero AI Glass - Restored Premium Glow */
 .hero-ai-glass {
   animation: 
-    subtleGlow 4s ease-in-out infinite alternate,
     celestialRotation 60s linear infinite !important;
   box-shadow: 
     0 0 60px rgba(56, 189, 248, 0.3),
     0 0 120px rgba(129, 140, 248, 0.15) !important;
+  will-change: transform;
+  transform: translateZ(0); /* Hardware accelerate component */
 }
 
 @keyframes celestialRotation {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from { transform: rotate(0deg) translateZ(0); }
+  to { transform: rotate(-360deg) translateZ(0); }
 }
 
 @keyframes subtleGlow {
@@ -1447,6 +1441,8 @@ canvas[id*="neural"] {
 /* Floating Tech Icons Animation */
 .logo__positioning {
   animation: floatIcon 6s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .logo__positioning.one { animation-delay: 0s; }
@@ -1455,8 +1451,8 @@ canvas[id*="neural"] {
 .logo__positioning.four { animation-delay: 4.5s; }
 
 @keyframes floatIcon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0) translateZ(0); }
+  50% { transform: translateY(-10px) translateZ(0); }
 }
 
 /* 3D Card Tilt on Hover */

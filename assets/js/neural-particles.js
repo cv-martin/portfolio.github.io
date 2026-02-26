@@ -112,20 +112,27 @@ function init() {
 // Check if particles are close enough to draw line between them
 function connect() {
     let opacityValue = 1;
+    const maxDistance = 150; // Fixed max distance for better predictability
+    const maxDistanceSq = maxDistance * maxDistance;
+
     for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-            let dx = particlesArray[a].x - particlesArray[b].x;
-            let dy = particlesArray[a].y - particlesArray[b].y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-            // Increase connection distance for a more "dense" neural network look
-            if (distance < (canvas.width / 7) * (canvas.height / 7) / 10) { // Adjusted threshold for actual distance
-                opacityValue = 1 - (distance / 200); // Adjusted for actual distance
-                // Use RGBA for the lines to match the theme
-                ctx.strokeStyle = 'rgba(56, 189, 248,' + opacityValue + ')';
-                ctx.lineWidth = 1;
+        for (let b = a + 1; b < particlesArray.length; b++) {
+            const p1 = particlesArray[a];
+            const p2 = particlesArray[b];
+            
+            let dx = p1.x - p2.x;
+            let dy = p1.y - p2.y;
+            let distanceSq = dx * dx + dy * dy;
+
+            if (distanceSq < maxDistanceSq) {
+                let distance = Math.sqrt(distanceSq);
+                opacityValue = 1 - (distance / maxDistance);
+                
+                ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue * 0.5})`; // Slightly more subtle
+                ctx.lineWidth = 0.8;
                 ctx.beginPath();
-                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
                 ctx.stroke();
             }
         }
@@ -133,9 +140,13 @@ function connect() {
 }
 
 // Animation loop
-function animate() {
+let lastTime = 0;
+function animate(timestamp) {
+    // Limit to ~60fps if needed, though browser handles this naturally
     requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();

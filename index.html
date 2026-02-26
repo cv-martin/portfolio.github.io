@@ -730,10 +730,10 @@
             <a href="#" class="portfolio-modal-trigger display-block" data-bs-toggle="modal"
               data-target="#portfolioModal" data-title="Tork AI" data-subtitle="AI Agent &amp; RAG Platform"
               data-desc="Built an advanced AI Agent platform with LLM-powered RAG workflows, real-time streaming UI, and automated customer support. Focused on contextual reasoning, high-end visual polish, and futuristic interaction design."
-              data-img="assets/img/portfolio/tork_live.webp" data-client="Tork"
+              data-img="assets/img/portfolio/tork_ai.png" data-client="Tork"
               data-tech="Python, OpenAI, LangChain, Streaming UI" data-link="https://tork.live/">
               <div class="portfolio__image--card">
-                <img src="assets/img/portfolio/tork_live.webp" alt="Tork AI Platform" loading="lazy" decoding="async">
+                <img src="assets/img/portfolio/tork_ai.png" alt="Tork AI Platform" loading="lazy" decoding="async">
               </div>
               <div class="portfolio__content">
                 <h3 class="portfolio__title text-white">Tork AI</h3>
@@ -771,10 +771,10 @@
             <a href="#" class="portfolio-modal-trigger display-block" data-bs-toggle="modal"
               data-target="#portfolioModal" data-title="Rao Engineering V2" data-subtitle="Precision Enterprise UX"
               data-desc="Redesigned an engineering enterprise portal with a focus on data visualization and complex workflow optimization. Applied deep indigo/mesh aesthetics to reflect professional reliability and technical rigor."
-              data-img="assets/img/portfolio/rao_v2.webp" data-client="Rao Consulting"
+              data-img="assets/img/portfolio/rao_v2.png" data-client="Rao Consulting"
               data-tech="Angular, Canvas, Micro-interactions" data-link="https://raoengineering-website-v2.vercel.app/">
               <div class="portfolio__image--card">
-                <img src="assets/img/portfolio/rao_v2.webp" alt="Rao V2 UX Engineering" loading="lazy" decoding="async">
+                <img src="assets/img/portfolio/rao_v2.png" alt="Rao V2 UX Engineering" loading="lazy" decoding="async">
               </div>
               <div class="portfolio__content">
                 <h3 class="portfolio__title text-white">Rao Engineering V2</h3>
@@ -963,16 +963,23 @@
             <h2 class="section__heading--title mb-10">Get In Touch</h2>
 
           </div>
-          <form class="contact__form" action="#">
+          <form class="contact__form" action="https://formsubmit.co/martin.intilt@gmail.com" method="POST">
+            <!-- Hidden inputs for FormSubmit -->
+            <input type="hidden" name="_subject" value="New Contact Request from vasnimartin.github.io">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://vasnimartin.github.io/">
             <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6 mb-30">
-                <input class="contact__input--field" placeholder="Your name" type="text">
+              <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
+                <input class="contact__input--field" name="name" placeholder="Your name" type="text" required>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 mb-30">
-                <input class="contact__input--field" placeholder="Your email" type="text">
+              <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
+                <input class="contact__input--field" name="email" placeholder="Your email" type="email" required>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
+                <input class="contact__input--field" name="phone" placeholder="Your phone number" type="tel">
               </div>
             </div>
-            <textarea class="contact__textarea--field" placeholder="Message"></textarea>
+            <textarea class="contact__textarea--field" name="message" placeholder="Message" required></textarea>
             <button type="submit" class="contact__button primary__btn">Send Request</button>
           </form>
         </div>

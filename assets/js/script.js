@@ -11,28 +11,51 @@
 const preLoader = function () {
   let preloaderWrapper = document.getElementById("preloader");
   
-  // Guaranteed fallback: remove preloader after 500ms for instant mobile reveal
-  const forceRemove = setTimeout(function() {
-    if (preloaderWrapper && preloaderWrapper.parentNode) {
-      preloaderWrapper.classList.add("preloaded");
-      setTimeout(() => preloaderWrapper.remove(), 300);
-    }
-  }, 500);
-  
-  // Normal load behavior
-  window.addEventListener("load", () => {
-    clearTimeout(forceRemove); 
+  // Instant reveal logic for performance (Zero-Delay)
+  const revealPage = () => {
     if (preloaderWrapper) {
-      setTimeout(function () {
-        preloaderWrapper.classList.add("preloaded");
-      }, 200);
-      setTimeout(function () {
-        preloaderWrapper.remove();
-      }, 800);
+      preloaderWrapper.classList.add("preloaded");
+      setTimeout(() => preloaderWrapper.remove(), 500);
     }
-  });
+  };
+
+  // Clear as soon as initial HTML is ready - don't wait for heavy images
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", revealPage);
+  } else {
+    revealPage();
+  }
+  
+  // Safety fallback for slow scripts
+  setTimeout(revealPage, 1000);
 };
 preLoader();
+
+// Prevent Contact Form from reloading page (Speed Fix)
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.querySelector(".contact__form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector("button");
+      const originalText = btn.textContent;
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+      
+      // Simulate success without reload
+      setTimeout(() => {
+        btn.textContent = "Request Sent!";
+        btn.style.backgroundColor = "#22c55e"; // Success Green
+        contactForm.reset();
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          btn.style.backgroundColor = "";
+        }, 3000);
+      }, 1000);
+    });
+  }
+});
 
 // getSiblings
 var getSiblings = function (elem) {

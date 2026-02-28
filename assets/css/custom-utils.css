@@ -1835,9 +1835,10 @@ canvas[id*="neural"] {
   display: flex;
   width: max-content;
   /* Duration depends on number of images */
-  animation: scroll-work-life 60s linear infinite;
+  animation: scroll-work-life 90s linear infinite; /* Increased duration for smoother scroll */
   gap: 2rem;
   padding: 1rem 0;
+  will-change: transform; /* Promote to own layer for GPU acceleration */
 }
 
 /* Pause on hover so users can see the images */
@@ -1854,6 +1855,8 @@ canvas[id*="neural"] {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
   flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  will-change: transform; /* Added for smoother hover effects */
+  backface-visibility: hidden; /* Prevent flickering */
 }
 
 .work-life-item:hover {

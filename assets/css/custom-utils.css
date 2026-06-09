@@ -3129,4 +3129,94 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 20px) !important;
 }
 
+/* ==========================================================================
+   PRIVACY CONSENT BANNER (Cyber-Minimalist Glassmorphism)
+   ========================================================================== */
+.privacy-consent-banner {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  max-width: 420px;
+  z-index: 99999;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.8) !important; /* frosted dark base */
+  border: 1px solid rgba(56, 189, 248, 0.2) !important; /* glowing light edge */
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(56, 189, 248, 0.08) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transform: translateY(120px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: 
+    transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+    opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+.privacy-consent-banner.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.privacy-consent-banner .consent-title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 1.15rem !important;
+  color: #fff !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+}
+
+.privacy-consent-banner .consent-text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important; /* slate color */
+  line-height: 1.6 !important;
+  margin-bottom: 0 !important;
+}
+
+.privacy-consent-banner .consent-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.privacy-consent-banner .consent-btn {
+  padding: 8px 20px !important;
+  font-size: 0.8rem !important;
+  border-radius: 50px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+.privacy-consent-banner .consent-btn.outline__btn {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+}
+
+.privacy-consent-banner .consent-btn.outline__btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+@media (max-width: 575px) {
+  .privacy-consent-banner {
+    left: 16px !important;
+    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    max-width: none !important;
+  }
+}
+
+
 

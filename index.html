@@ -51,6 +51,10 @@
   <script>
     document.documentElement.classList.add("dark");
   </script>
+
+  <!-- ======= Production Monitoring & Telemetry ======= -->
+  <script src="assets/js/env.js" defer></script>
+  <script src="assets/js/monitoring.js" defer></script>
 </head>
 
 <body class="bg-dark_primary_bg">
@@ -1030,16 +1034,16 @@
             <input type="hidden" name="_next" value="https://cvmartin.github.io/">
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
-                <input class="contact__input--field" name="name" placeholder="Your name" type="text" required>
+                <input class="contact__input--field" name="name" placeholder="Your name" type="text" data-clarity-mask="true" required>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
-                <input class="contact__input--field" name="email" placeholder="Your email" type="email" required>
+                <input class="contact__input--field" name="email" placeholder="Your email" type="email" data-clarity-mask="true" required>
               </div>
               <div class="col-lg-4 col-md-4 col-sm-12 mb-30">
-                <input class="contact__input--field" name="phone" placeholder="Your phone number" type="tel">
+                <input class="contact__input--field" name="phone" placeholder="Your phone number" type="tel" data-clarity-mask="true">
               </div>
             </div>
-            <textarea class="contact__textarea--field" name="message" placeholder="Message" required></textarea>
+            <textarea class="contact__textarea--field" name="message" placeholder="Message" data-clarity-mask="true" required></textarea>
             <button type="submit" class="contact__button primary__btn">Send Request</button>
           </form>
         </div>

@@ -1282,7 +1282,7 @@
                   <polyline points="10 9 9 9 8 9"></polyline>
                 </svg></span>
               Project Scope :
-              <span class="portfolio__modal--info__name">Application</span>
+              <span class="portfolio__modal--info__name modal-scope">Application</span>
             </p>
             <p class="portfolio__modal--info--text">
               <span class="portfolio__modal--info__icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="24"
@@ -1292,7 +1292,7 @@
                   <polyline points="8 6 2 12 8 18"></polyline>
                 </svg></span>
               Technologies :
-              <span class="portfolio__modal--info__name">Figma</span>
+              <span class="portfolio__modal--info__name modal-tech">Figma</span>
             </p>
           </div>
           <div class="portfolio__modal--info--list">
@@ -1304,7 +1304,7 @@
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg></span>
               Client :
-              <span class="portfolio__modal--info__name">Zenflow</span>
+              <span class="portfolio__modal--info__name modal-client">Zenflow</span>
             </p>
             <p class="portfolio__modal--info--text">
               <span class="portfolio__modal--info__icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="24"
@@ -1315,7 +1315,7 @@
                   <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg></span>
               Preview :
-              <a class="portfolio__modal--info__name"
+              <a class="portfolio__modal--info__name modal-link"
                 href="https://www.figma.com/design/xdjrdFYPJCDcaPcct9LU69/Toola-Accounting-website?node-id=0-1&p=f&t=Rb8t8UiExaiRxyZ1-0"
                 target="_blank" rel="noopener noreferrer">https://toola.in/</a>
             </p>
@@ -1389,17 +1389,25 @@
       updateText(modalDesc, desc);
       if (modalImg) modalImg.src = img;
 
-      // These might need specific selectors if they don't have unique classes
-      const infoNames = portfolioModal.querySelectorAll('.portfolio__modal--info__name');
-      if (infoNames.length >= 2) {
-        updateText(infoNames[0], tech); // 1st is Tech
-        updateText(infoNames[1], client); // 2nd is Client
-      }
+      // Update specific details using unique classes
+      const scopeEl = portfolioModal.querySelector('.modal-scope');
+      const techEl = portfolioModal.querySelector('.modal-tech');
+      const clientEl = portfolioModal.querySelector('.modal-client');
+      const linkEl = portfolioModal.querySelector('.modal-link');
 
-      const modalLink = portfolioModal.querySelector('a.portfolio__modal--info__name');
-      if (modalLink) {
-        modalLink.href = link;
-        modalLink.textContent = (!link || link === '#') ? 'View Case Study' : link;
+      // Extract category badge text for scope
+      const card = button.closest('.portfolio__card');
+      const badge = card ? (card.querySelector('.portfolio__category-badge') || card.querySelector('.ai-badge')) : null;
+      let scopeText = badge ? badge.textContent.trim() : "";
+      if (scopeText === "AI POWERED") scopeText = "AI & Interaction Design";
+
+      updateText(scopeEl, scopeText || "Application");
+      updateText(techEl, tech);
+      updateText(clientEl, client);
+
+      if (linkEl) {
+        linkEl.href = link;
+        linkEl.textContent = (!link || link === '#') ? 'View Case Study' : link;
       }
 
       // Manual Bootstrap Modal Toggle (works for BS4 and BS5)
